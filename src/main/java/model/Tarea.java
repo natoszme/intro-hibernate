@@ -2,10 +2,23 @@ package model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Tarea {
 	
+	@Id
+	@GeneratedValue
+	private long id;
 	private Date fechaLimiteDeEntrega;
 	private String enunciado;
+	
+	//lo necesita hibernate para instanciarla
+	private Tarea() {
+		
+	}
 	
 	public Tarea(Date fechaLimiteDeEntrega, String enunciado) {
 		super();
