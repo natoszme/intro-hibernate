@@ -3,10 +3,8 @@ package model;
 import java.util.Arrays;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.OneToMany;
 
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 

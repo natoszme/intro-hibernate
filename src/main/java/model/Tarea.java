@@ -6,15 +6,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import com.sun.istack.internal.NotNull;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Tareas")
 public class Tarea {
 	
 	@Id
-	@NotNull
 	@GeneratedValue
+	@Column(name = "tareaId")
 	private long id;
 	
 	@Column(nullable = false)
@@ -24,9 +24,8 @@ public class Tarea {
 	private String enunciado;
 	
 	//lo necesita hibernate para instanciarla
-	private Tarea() {
-		
-	}
+	@SuppressWarnings("unused")
+	private Tarea() {}
 	
 	public Tarea(Date fechaLimiteDeEntrega, String enunciado) {
 		super();

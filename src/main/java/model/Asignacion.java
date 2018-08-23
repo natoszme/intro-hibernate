@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -10,22 +11,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
-import javax.persistence.Transient;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Asignaciones")
 public class Asignacion {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "asignacionId")
 	private long id;
 	
-	//lo comento porque sino no se persiste la nota
-	//@Transient
 	@ElementCollection
-	//como se cambia el nombre de la columna 'Asignacion_id'?
+	@CollectionTable(name = "Notas_Asignaciones")
+	//TODO revisar nombres columnas
 	//y para que no sea null?
-	@MapKeyColumn(name = "AsignacionId")
 	private List<String> notas;	
 	
 	@ManyToOne(optional = false, cascade = CascadeType.PERSIST)
@@ -33,6 +33,7 @@ public class Asignacion {
 	//y para que no sea null?
 	private Tarea tarea;
 	
+	@SuppressWarnings("unused")
 	private Asignacion() {}
 	
 	public Asignacion(Tarea tarea, List<String> notas) {

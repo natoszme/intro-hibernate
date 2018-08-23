@@ -11,12 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Alumnos")
 public class Alumno {
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "alumnoId")
 	private long id;
 	
 	@Column(nullable = false)
@@ -35,10 +38,11 @@ public class Alumno {
 	@OneToMany(cascade = CascadeType.ALL)
 	//arg mappedBy: como se usa?
 	
-	//evita crear la tabla alumno_asignacion
+	//evita crear la tabla alumno_asignacion!
 	@JoinColumn(name = "idAlumno")
 	private List<Asignacion> asignaciones = new ArrayList<>();
 	
+	@SuppressWarnings("unused")
 	private Alumno() {}
 	
 	public Alumno(String legajo, String nombre, String email, String githubUser, String apellido, String secretCode) {
