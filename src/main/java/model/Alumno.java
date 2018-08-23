@@ -38,9 +38,11 @@ public class Alumno {
 	@OneToMany(cascade = CascadeType.ALL)
 	//arg mappedBy: como se usa?
 	
-	//evita crear la tabla alumno_asignacion!
-	@JoinColumn(name = "idAlumno")
+	//falta que la FK alumnoId no sea nullable => nullable = false en @JoinColumn
+	//el @JoinColumn evita crear la tabla alumno_asignacion!
+	@JoinColumn(name = "alumnoId", nullable = false)
 	private List<Asignacion> asignaciones = new ArrayList<>();
+	//como hariamos para que la asignacion deba ser de un alumno? (sino, su existencia no tiene sentido) => con la FK en not nullable!
 	
 	@SuppressWarnings("unused")
 	private Alumno() {}

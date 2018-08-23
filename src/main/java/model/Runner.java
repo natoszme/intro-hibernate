@@ -18,13 +18,8 @@ public class Runner {
 		
 		em.persist(new Tarea(new Date(), "Probando probando, probando mi amor por ti"));
 		
-		Tarea unaTarea = em.find(Tarea.class, new Long(1));
-		
+		Tarea unaTarea = em.find(Tarea.class, new Long(1));		
 		System.out.println(unaTarea.getEnunciado());
-		
-		Asignacion unaAsignacion = new Asignacion(new Tarea(new Date(), "enunciado de prueba!!!"), Arrays.asList("bien", "muybien"));
-		//como hariamos para que la asignacion deba ser de un alumno? (sino, su existencia no tiene sentido)
-		em.persist(unaAsignacion);
 		
 		Alumno juan = new Alumno("1000000", "juan", "perezj@j.com", "juanpe", "perez", null);
 		
@@ -37,8 +32,6 @@ public class Runner {
 		
 		//la tabla asignacion_notas no tiene PK...
 		asignacionJuan.setNotas(Arrays.asList("mal"));
-		
-		//como se tiran queries? por ej.: si quiero obtener alguna asignacion de juan
 		
 		em.persist(juan);
 		

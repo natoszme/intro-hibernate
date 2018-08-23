@@ -1,45 +1,45 @@
 
-    create table Alumno (
-        id bigint not null auto_increment,
+    create table Alumnos (
+        alumnoId bigint not null auto_increment,
         apellido varchar(255) not null,
         email varchar(255),
         githubUser varchar(255),
         legajo varchar(255) not null,
         nombre varchar(255) not null,
         secretCode varchar(255),
-        primary key (id)
+        primary key (alumnoId)
     )
 
-    create table Asignacion (
-        id bigint not null auto_increment,
+    create table Asignaciones (
+        asignacionId bigint not null auto_increment,
         tareaId bigint not null,
-        idAlumno bigint,
-        primary key (id)
+        alumnoId bigint not null,
+        primary key (asignacionId)
     )
 
-    create table Asignacion_notas (
-        Asignacion_id bigint not null,
-        notas varchar(255)
+    create table Notas_Asignaciones (
+        asignacionId bigint not null,
+        nota varchar(255) not null
     )
 
-    create table Tarea (
-        id bigint not null auto_increment,
+    create table Tareas (
+        tareaId bigint not null auto_increment,
         enunciado varchar(255) not null,
         fechaLimiteDeEntrega datetime not null,
-        primary key (id)
+        primary key (tareaId)
     )
 
-    alter table Asignacion 
-        add constraint FK_6mddi497j97l040w0xh0uru9c 
+    alter table Asignaciones 
+        add constraint FK_qgwoi87g1whqatir5l3un9n4r 
         foreign key (tareaId) 
-        references Tarea (id)
+        references Tareas (tareaId)
 
-    alter table Asignacion 
-        add constraint FK_d6w2cqxnm8plr3ujay37aowoy 
-        foreign key (idAlumno) 
-        references Alumno (id)
+    alter table Asignaciones 
+        add constraint FK_j5qeo011jhjue99hkvdvy2mwc 
+        foreign key (alumnoId) 
+        references Alumnos (alumnoId)
 
-    alter table Asignacion_notas 
-        add constraint FK_2nu3de42ulnsxpwy48m3u4wrn 
-        foreign key (Asignacion_id) 
-        references Asignacion (id)
+    alter table Notas_Asignaciones 
+        add constraint FK_238yj8iwi4em0d9a5t2v131kv 
+        foreign key (asignacionId) 
+        references Asignaciones (asignacionId)

@@ -23,14 +23,14 @@ public class Asignacion {
 	private long id;
 	
 	@ElementCollection
-	@CollectionTable(name = "Notas_Asignaciones")
-	//TODO revisar nombres columnas
-	//y para que no sea null?
+	@CollectionTable(name = "Notas_Asignaciones", joinColumns = @JoinColumn(name = "asignacionId"))
+	//y para que no sea null? => nullable = false en @Column
+	@Column(name = "nota", nullable = false)
 	private List<String> notas;	
 	
-	@ManyToOne(optional = false, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "tareaId")
-	//y para que no sea null?
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "tareaId", nullable = false)
+	//y para que no sea null? => con el nullable = false en @JoinColumn
 	private Tarea tarea;
 	
 	@SuppressWarnings("unused")
