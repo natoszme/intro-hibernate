@@ -1,20 +1,47 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Alumno {
 	
+	@Id
+	@GeneratedValue
+	private long id;
+	
+	@Column(nullable = false)
 	private String legajo;
+	
+	@Column(nullable = false)
 	private String nombre;
-	private String apellido;
+	
+	@Column(nullable = false)
+	private String apellido;	
+	
 	private String secretCode;
 	private String email;
 	private String githubUser;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	//arg mappedBy: como se usa?
+	
+	//evita crear la tabla alumno_asignacion
+	@JoinColumn(name = "idAlumno")
 	private List<Asignacion> asignaciones = new ArrayList<>();
 	
+	private Alumno() {}
+	
 	public Alumno(String legajo, String nombre, String email, String githubUser, String apellido, String secretCode) {
-		super();
 		this.legajo = legajo;
 		this.nombre = nombre;
 		this.email = email;
@@ -55,8 +82,10 @@ public class Alumno {
 		this.secretCode = secretCode;
 	}
 	
-	public void asignarTarea(Tarea tarea) {
-		this.asignaciones.add(new Asignacion(tarea));
+	public Asignacion asignarTarea(Tarea tarea) {
+		Asignacion asignacion = new Asignacion(tarea, Arrays.asList());
+		this.asignaciones.add(asignacion);
+		return asignacion;
 	}
 
 	public String getEmail() {
@@ -73,6 +102,10 @@ public class Alumno {
 
 	public void setGithubUser(String githubUser) {
 		this.githubUser = githubUser;
+	}
+	
+	public void setAsignaciones(List<Asignacion> asignaciones) {
+		this.asignaciones = asignaciones;
 	}
 
 }
